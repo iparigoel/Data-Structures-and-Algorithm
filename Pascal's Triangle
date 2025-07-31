@@ -1,0 +1,26 @@
+class Solution {
+    public void help(List<List<Integer>> list, int numRows, int row){
+        if(row == numRows) return;
+        if(row == 0){
+            List<Integer> rowList = new ArrayList<>();
+            rowList.add(1);
+            list.add(rowList);
+        }
+        else{
+            List<Integer> prevRow = list.get(row - 1);
+            List<Integer> rowList = new ArrayList<>();
+            rowList.add(1);
+            for(int i = 1; i < prevRow.size(); i++){
+                rowList.add(prevRow.get(i - 1) + prevRow.get(i));
+            }
+            rowList.add(1);
+            list.add(rowList);
+        }
+        help(list, numRows, row + 1);
+    }
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> list = new ArrayList<>();
+        help(list, numRows, 0);
+        return list;
+    }
+}
